@@ -10,9 +10,12 @@ function App() {
   const [age, setAge] = useState(0);
   const [name, setName] = useState(0)
   let c = Object.assign(a);
+  let d = [];
   let [b, setB] = useState(c);
+  let arrFilter = { "age1": age, "name1": name }
 
-  // console.log("bbbbb", b)
+  console.log("arrFilter", arrFilter);
+
   const filterShowName = () => {
     !showName ? setShowName(1) : setShowName(0)
   }
@@ -23,24 +26,15 @@ function App() {
 
   const filterName = (data) => {
     setName(data);
-    name === 0 && age === 0 ? b = a.filter(item => item.name > data) : b = b.filter(item => item.name > data);
-    setB(b);
-    console.log("name", b);
-
   }
 
   const filterAge = (data) => {
     setAge(data);
-    name === 0 && age === 0 ? b = a.filter(item => item.age > data) : b = b.filter(item => item.age > data);
-    console.log("age", b);
-    setB(b);
   }
 
-  // useEffect(() => {
-  //   name != 0 ? a = a.filter(item => item.name > name) : console.log("name", a);
-  //   age != 0 ? a = a.filter(item => item.age > age) : console.log("age", a);
-  //   setB(a);
-  // }, [age, name])
+
+  useEffect(() => { d = a.filter(item => item.name > arrFilter.name1 && item.age > arrFilter.age1); setB(d); }, [name, age])
+
 
   return (
     <div className="App">
